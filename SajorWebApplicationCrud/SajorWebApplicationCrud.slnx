@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="Domain/Domain.csproj" />
+  <Project Path="Framework/Framework.csproj" />
+  <Project Path="SajorData/SajorData.sqlproj" Id="401e07be-034f-49e3-811f-65c95256f719">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="SajorWebApp/SajorWebApp.csproj" Id="befdc58b-fa6b-4c7a-ab9b-0fa373da87e0" />
+  <Project Path="SajorWPF/SajorWPF.csproj" Id="f0ddc72b-d95c-4111-beac-04a1565bde2b" />
+</Solution>
