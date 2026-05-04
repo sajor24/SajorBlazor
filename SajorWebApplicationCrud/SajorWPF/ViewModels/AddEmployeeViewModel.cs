@@ -1,6 +1,4 @@
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Domain.Commands;
 using SajorWPF.Commands;
@@ -107,13 +105,10 @@ namespace SajorWPF.ViewModels
             set
             {
                 _isEditMode = value;
-                OnPropertyChanged(nameof(IsEditMode));
-                OnPropertyChanged(nameof(IsAddMode));
                 OnPropertyChanged(nameof(SaveButtonText));
             }
         }
 
-        public bool IsAddMode => !IsEditMode;
         public string SaveButtonText => IsEditMode ? "Update" : "Save";
 
         public ICommand SaveCommand { get; }
@@ -130,9 +125,7 @@ namespace SajorWPF.ViewModels
             }
             else
             {
-                try
-                {
-                    var employee = new Employee
+                  var employee = new Employee
                     {
                         FirstName = FirstName,
                         LastName = LastName,
@@ -145,18 +138,12 @@ namespace SajorWPF.ViewModels
                     ClearForm();
                     await LoadEmployeesAsync();
                 }
-                catch (Exception ex)
-                {
-                    System.Windows.MessageBox.Show($"Error saving employee: {ex.Message}", "Error",
-                        System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                }
+               
             }
-        }
 
         public async Task UpdateEmployee()
         {
-            try
-            {
+            
                 var employee = new Employee
                 {
                     EmployeeId = _currentEmployeeId,
@@ -169,27 +156,16 @@ namespace SajorWPF.ViewModels
                 await _updateEmployee.ExecuteAsync(employee);
 
                 ClearForm();
-                IsEditMode = false;
                 await LoadEmployeesAsync();
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show($"Error updating employee: {ex.Message}", "Error",
-                    System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-            }
+           
         }
 
         public async void DeleteEmployee(Employee employee)
         {
-            try
-            {
+          
                 await _deleteEmployee.ExecuteAsync(employee);
                 await LoadEmployeesAsync();
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show($"Error deleting employee: {ex.Message}", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-            }
+          
         }
 
         public void LoadEmployeeForEdit(Employee employee)
