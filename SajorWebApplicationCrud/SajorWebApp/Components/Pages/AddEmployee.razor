@@ -1,4 +1,4 @@
-﻿@page "/AddEmployee"
+@page "/AddEmployee"
 @rendermode InteractiveServer
 @using Domain.Queries
 @using Domain.Models
@@ -7,7 +7,6 @@
 @inject IUpdateCommand update
 @inject IDeleteCommand delete
 @inject IGetAllEmployee getAll
-@inject IReadEmployeeById read
 
 <PageTitle>Employee Management</PageTitle>
 
@@ -108,13 +107,6 @@
     {
         var result = await getAll.ExecuteAsync();
         employees = result?.ToList() ?? new();
-    }
-
-    void ShowAddModal()
-    {
-        employee = new Employee();
-        isEditing = false;
-        showForm = true;
     }
 
     void ShowEditModal(Employee emp)
